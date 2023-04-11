@@ -23,6 +23,7 @@ primeFactors n = factor n primes
             | n `mod` p == 0 = p : factor (n `div` p) (p:ps)
             | otherwise      = factor n ps
         primes = 2 : filter ((==1) . length . primeFactors) [3,5..]
+
 factors :: Int -> [Int]
 factors n = [x | x <- [1 .. n], mod n x == 0]
 isPrime :: Int -> Bool

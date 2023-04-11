@@ -1,6 +1,5 @@
 -- List Comprehension Exercises
 
-
 -- last element of a list
 last' :: [a] -> a
 last' = foldl1 (\_ x -> x)
@@ -17,6 +16,9 @@ sums (x : xs) = x + sums xs
 
 addTuples :: [(Int, Int)] -> [Int]
 addTuples xs = [x + y | (x, y) <- xs]
+
+swaptuples :: [(Int,Int)]->[(Int,Int)]
+swaptuples xs = [(y,x) | (x,y)<-xs]
 
 elem' :: (Eq a) => a -> [a] -> Bool
 elem' _ [] = error "Empty List"
@@ -60,3 +62,17 @@ rev' = foldl (flip(:)) []
 
 prefixes :: [a] -> [[a]]
 prefixes = foldr (\x acc -> [x] : map (x :) acc) []
+
+rightTriangles :: [(Int,Int,Int)]
+rightTriangles = [ (a,b,c) | c <- [1..10], b <- [1..c], a <- [1..b], a^2 + b^2 == c^2, a+b+c == 24] 
+
+stringswap :: Char -> Char -> String -> String
+stringswap a b = map (\x -> if x == a then b else x)
+
+compress :: Eq a => [a] -> [a]
+compress [] = []
+compress (x : xs) = x : (compress $ dropWhile (== x) xs)
+
+
+removeAt :: (Enum a) => Int -> [a] -> (a, [a])
+removeAt n xs = ((xs !! (n - 1)), [x | (i, x) <- zip [1 ..] xs, i /= n])
