@@ -76,3 +76,10 @@ compress (x : xs) = x : (compress $ dropWhile (== x) xs)
 
 removeAt :: (Enum a) => Int -> [a] -> (a, [a])
 removeAt n xs = ((xs !! (n - 1)), [x | (i, x) <- zip [1 ..] xs, i /= n])
+
+quicksort :: (Ord a) => [a] -> [a]
+quicksort [] = []
+quicksort (x : xs) =
+  let smallerSorted = quicksort (filter (<= x) xs)
+      biggerSorted = quicksort (filter (> x) xs)
+   in smallerSorted ++ [x] ++ biggerSorted
